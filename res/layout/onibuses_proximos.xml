@@ -13,6 +13,8 @@
     <com.emilsjolander.components.stickylistheaders.StickyListHeadersListView
             android:id="@+id/listPonto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:listSelector="@android:color/holo_green_light"
+            />
 
 </RelativeLayout>

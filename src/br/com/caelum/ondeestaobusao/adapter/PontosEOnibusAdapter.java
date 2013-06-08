@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.emilsjolander.components.stickylistheaders.StickyListHeadersAdapter;
@@ -15,6 +14,7 @@ import com.emilsjolander.components.stickylistheaders.StickyListHeadersAdapter;
 import br.com.caelum.ondeestaobusao.activity.R;
 import br.com.caelum.ondeestaobusao.model.Onibus;
 import br.com.caelum.ondeestaobusao.model.Ponto;
+import android.widget.CheckBox;
 
 public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 	private final Activity activity;
@@ -70,18 +70,40 @@ public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeade
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         Onibus onibus = onibuses.get(i);
 
-        TextView view = (TextView) convertView;
-        if (view  == null)
-            view = (TextView) activity.getLayoutInflater().inflate(R.layout.item_onibus, null);
+        OnibusViewHolder holder;
+        if (convertView  == null) {
+            convertView = (View) activity.getLayoutInflater().inflate(R.layout.item_onibus, null);
+            holder = new OnibusViewHolder();
+            holder.nome = (TextView) convertView.findViewById(R.id.nome_onibus);
+            holder.selecionado = (CheckBox) convertView.findViewById(R.id.onibus_selecionado);
 
-        view.setText(onibus.toString());
+            convertView.setTag(holder);
+        } else {
+            holder = (OnibusViewHolder) convertView.getTag();
+        }
 
-        return view;
+        holder.nome.setText(onibus.toString());
+        holder.selecionado.setChecked(false);
+
+        return convertView;
     }
 
     class HeaderViewHolder {
         TextView nomePonto;
         TextView distancia;
+    }
+
+    public class OnibusViewHolder {
+        private TextView nome;
+        private CheckBox selecionado;
+
+        public CheckBox getSelecionado() {
+            return selecionado;
+        }
+
+        public TextView getNome() {
+            return this.nome;
+        }
     }
 
     private List<Onibus> convert(List<Ponto> pontos) {
