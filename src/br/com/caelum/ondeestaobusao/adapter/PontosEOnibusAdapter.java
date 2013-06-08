@@ -1,36 +1,112 @@
 package br.com.caelum.ondeestaobusao.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
+import com.emilsjolander.components.stickylistheaders.StickyListHeadersAdapter;
+
 import br.com.caelum.ondeestaobusao.activity.R;
 import br.com.caelum.ondeestaobusao.model.Onibus;
 import br.com.caelum.ondeestaobusao.model.Ponto;
 
-public class PontosEOnibusAdapter extends BaseExpandableListAdapter{
+public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 	private final Activity activity;
-	private final List<Ponto> pontos;
+	private final List<PontosEOnibus> pontosEOnibuses;
 
 	public PontosEOnibusAdapter(List<Ponto> pontos, Activity activity) {
-		this.pontos = pontos;
 		this.activity = activity;
-	}
-	
-	@Override
-	public Object getChild(int groupPosition, int childPosition) {
-		return pontos.get(groupPosition).getOnibuses().get(childPosition);
+        this.pontosEOnibuses = convert(pontos);
 	}
 
-	@Override
-	public long getChildId(int groupPosition, int childPosition) {
-		return pontos.get(groupPosition).getOnibuses().get(childPosition).getId();
-	}
+    @Override
+    public View getHeaderView(int i, View convertView, ViewGroup viewGroup) {
+        PontosEOnibus pontosEOnibus = pontosEOnibuses.get(i);
 
-	@Override
+        HeaderViewHolder holder;
+        if (convertView == null) {
+            convertView = activity.getLayoutInflater().inflate(R.layout.item_list_de_pontos, null);
+            holder = new HeaderViewHolder();
+            holder.nomePonto = (TextView) convertView.findViewById(R.id.nomePonto);
+            holder.distancia = (TextView) convertView.findViewById(R.id.distancia);
+            convertView.setTag(holder);
+        } else {
+            holder = (HeaderViewHolder) convertView.getTag();
+        }
+
+        holder.nomePonto.setText(pontosEOnibus.ponto.getDescricao());
+        holder.distancia.setText(pontosEOnibus.ponto.getDistancia());
+
+       return convertView;
+    }
+
+    @Override
+    public long getHeaderId(int i) {
+        return pontosEOnibuses.get(i).ponto.hashCode();
+    }
+
+    @Override
+    public int getCount() {
+        return pontosEOnibuses.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return pontosEOnibuses.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return pontosEOnibuses.hashCode();
+    }
+
+    @Override
+    public View getView(int i, View convertView, ViewGroup viewGroup) {
+        Onibus onibus = pontosEOnibuses.get(i).onibus;
+
+        TextView view = (TextView) convertView;
+        if (view  == null)
+            view = (TextView) activity.getLayoutInflater().inflate(R.layout.item_onibus, null);
+
+        view.setText(onibus.toString());
+
+        return view;
+    }
+
+    class HeaderViewHolder {
+        TextView nomePonto;
+        TextView distancia;
+    }
+
+    class PontosEOnibus {
+        private Onibus onibus;
+        private Ponto ponto;
+
+        public PontosEOnibus(Onibus onibus, Ponto ponto) {
+            this.onibus = onibus;
+            this.ponto = ponto;
+        }
+
+    }
+
+    private List<PontosEOnibus> convert(List<Ponto> pontos) {
+        ArrayList<PontosEOnibus> pontosEOnibuses = new ArrayList<PontosEOnibus>();
+        for (Ponto ponto : pontos) {
+            for (Onibus onibus : ponto.getOnibuses()) {
+                pontosEOnibuses.add(new PontosEOnibus(onibus, ponto));
+            }
+        }
+
+        return pontosEOnibuses;
+    }
+
+    /*	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		
@@ -40,29 +116,10 @@ public class PontosEOnibusAdapter extends BaseExpandableListAdapter{
 		view.setText(onibus.toString());
 		
 		return view;
-	}
+	}*/
 
-	@Override
-	public int getChildrenCount(int groupPosition) {
-		return pontos.get(groupPosition).getOnibuses().size();
-	}
 
-	@Override
-	public Object getGroup(int groupPosition) {
-		return pontos.get(groupPosition);
-	}
-
-	@Override
-	public int getGroupCount() {
-		return pontos.size();
-	}
-
-	@Override
-	public long getGroupId(int groupPosition) {
-		return pontos.get(groupPosition).hashCode();
-	}
-
-	@Override
+/*	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
 		
@@ -81,16 +138,6 @@ public class PontosEOnibusAdapter extends BaseExpandableListAdapter{
 		}
 		
 		return view;
-	}
-
-	@Override
-	public boolean hasStableIds() {
-		return false;
-	}
-
-	@Override
-	public boolean isChildSelectable(int groupPosition, int childPosition) {
-		return true;
-	}
+	}*/
 
 }

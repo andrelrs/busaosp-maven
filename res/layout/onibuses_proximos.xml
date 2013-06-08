@@ -4,10 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <br.com.caelum.ondeestaobusao.widget.PontoExpandableListView
+<!--    <br.com.caelum.ondeestaobusao.widget.PontoExpandableListView
         android:id="@+id/listPonto"
         android:background="@color/fundo_expandable_list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent" />-->
+
+    <com.emilsjolander.components.stickylistheaders.StickyListHeadersListView
+            android:id="@+id/listPonto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 </RelativeLayout>

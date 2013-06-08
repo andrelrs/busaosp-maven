@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+
+import com.emilsjolander.components.stickylistheaders.StickyListHeadersListView;
+
 import br.com.caelum.ondeestaobusao.activity.MainActivity;
 import br.com.caelum.ondeestaobusao.activity.R;
 import br.com.caelum.ondeestaobusao.activity.application.BusaoApplication;
@@ -19,17 +22,20 @@ import br.com.caelum.ondeestaobusao.task.BuscaPontosDoOnibusTask;
 import br.com.caelum.ondeestaobusao.widget.PontoExpandableListView;
 
 public class PontosProximosFragment extends Fragment {
-	private PontoExpandableListView pontosExpandableListView;
-	
+	/*private PontoExpandableListView pontosExpandableListView;*/
+
+    private StickyListHeadersListView pontosListView;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
+
 		View view = inflater.inflate(R.layout.onibuses_proximos, null);
-		
-		pontosExpandableListView = (PontoExpandableListView) view.findViewById(R.id.listPonto);
-		
-		List<Ponto> pontos = ((MainActivity)getActivity()).getPontos();
+
+		/*pontosExpandableListView = (PontoExpandableListView) view.findViewById(R.id.listPonto);*/
+        pontosListView = (StickyListHeadersListView) view.findViewById(R.id.listPonto);
+
+        List<Ponto> pontos = ((MainActivity) getActivity()).getPontos();
 		if (pontos!= null) {
 			colocaNaTela(pontos);
 		}
@@ -38,7 +44,7 @@ public class PontosProximosFragment extends Fragment {
 	}
 	
 	public void colocaNaTela(final List<Ponto> pontos) {
-		pontosExpandableListView.setAdapter(new PontosEOnibusAdapter(pontos, getActivity()));
+/*		pontosExpandableListView.setAdapter(new PontosEOnibusAdapter(pontos, getActivity()));
 
 		pontosExpandableListView.setOnChildClickListener(new OnChildClickListener() {
 
@@ -53,7 +59,10 @@ public class PontosProximosFragment extends Fragment {
 				
 				return false;
 			}
-		});
+		});*/
+
+        PontosEOnibusAdapter adapter = new PontosEOnibusAdapter(pontos, getActivity());
+        pontosListView.setAdapter(adapter);
 	}
 	
 }
