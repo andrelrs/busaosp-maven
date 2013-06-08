@@ -10,6 +10,8 @@ public class Onibus implements Serializable {
 	private Operacao operacao;
 	private Sentido sentido;
 
+    private transient Ponto ponto;
+
 	public Onibus(Long id, String letreiro, int codigoGPS, Operacao operacao, Sentido sentido) {
 		this.id = id;
 		this.letreiro = letreiro;
@@ -17,6 +19,8 @@ public class Onibus implements Serializable {
 		this.operacao = operacao;
 		this.sentido = sentido;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -42,4 +46,11 @@ public class Onibus implements Serializable {
 		return this.letreiro + " - " + this.sentido;
 	}
 
+    public Ponto getPonto() {
+        return ponto;
+    }
+
+    public void setPonto(Ponto ponto) {
+        this.ponto = ponto;
+    }
 }

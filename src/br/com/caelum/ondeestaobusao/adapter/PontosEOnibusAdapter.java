@@ -18,16 +18,16 @@ import br.com.caelum.ondeestaobusao.model.Ponto;
 
 public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 	private final Activity activity;
-	private final List<PontosEOnibus> pontosEOnibuses;
+	private final List<Onibus> onibuses;
 
 	public PontosEOnibusAdapter(List<Ponto> pontos, Activity activity) {
 		this.activity = activity;
-        this.pontosEOnibuses = convert(pontos);
+        this.onibuses = convert(pontos);
 	}
 
     @Override
     public View getHeaderView(int i, View convertView, ViewGroup viewGroup) {
-        PontosEOnibus pontosEOnibus = pontosEOnibuses.get(i);
+        Onibus onibus = onibuses.get(i);
 
         HeaderViewHolder holder;
         if (convertView == null) {
@@ -40,35 +40,35 @@ public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeade
             holder = (HeaderViewHolder) convertView.getTag();
         }
 
-        holder.nomePonto.setText(pontosEOnibus.ponto.getDescricao());
-        holder.distancia.setText(pontosEOnibus.ponto.getDistancia());
+        holder.nomePonto.setText(onibus.getPonto().getDescricao());
+        holder.distancia.setText(onibus.getPonto().getDistancia());
 
        return convertView;
     }
 
     @Override
     public long getHeaderId(int i) {
-        return pontosEOnibuses.get(i).ponto.hashCode();
+        return onibuses.get(i).getPonto().hashCode();
     }
 
     @Override
     public int getCount() {
-        return pontosEOnibuses.size();
+        return onibuses.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return pontosEOnibuses.get(i);
+        return onibuses.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return pontosEOnibuses.hashCode();
+        return onibuses.get(i).hashCode();
     }
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
-        Onibus onibus = pontosEOnibuses.get(i).onibus;
+        Onibus onibus = onibuses.get(i);
 
         TextView view = (TextView) convertView;
         if (view  == null)
@@ -84,26 +84,13 @@ public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeade
         TextView distancia;
     }
 
-    class PontosEOnibus {
-        private Onibus onibus;
-        private Ponto ponto;
-
-        public PontosEOnibus(Onibus onibus, Ponto ponto) {
-            this.onibus = onibus;
-            this.ponto = ponto;
-        }
-
-    }
-
-    private List<PontosEOnibus> convert(List<Ponto> pontos) {
-        ArrayList<PontosEOnibus> pontosEOnibuses = new ArrayList<PontosEOnibus>();
+    private List<Onibus> convert(List<Ponto> pontos) {
+        ArrayList<Onibus> onibuses = new ArrayList<Onibus>();
         for (Ponto ponto : pontos) {
-            for (Onibus onibus : ponto.getOnibuses()) {
-                pontosEOnibuses.add(new PontosEOnibus(onibus, ponto));
-            }
+            onibuses.addAll(ponto.getOnibuses());
         }
 
-        return pontosEOnibuses;
+        return onibuses;
     }
 
     /*	@Override

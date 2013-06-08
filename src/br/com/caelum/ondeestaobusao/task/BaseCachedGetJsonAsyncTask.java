@@ -37,13 +37,18 @@ public abstract class BaseCachedGetJsonAsyncTask<Params, Result> extends AsyncTa
 			GsonBuilder builder = new GsonBuilder();
 			Gson gson = builder.create();
 			endBackgroundStatus = TaskStatus.OK;
-			
-			return gson.fromJson(json, getElementType());
+            Result result = gson.fromJson(json, getElementType());
+            gambiarra(result);
+            return result;
 		} catch (IOException e) {
 			endBackgroundStatus = TaskStatus.ERROR;
 			return onErrorReturn();
 		}
 	}
+
+    protected void gambiarra(Result result){
+
+    }
 	
 	public TaskStatus getEndBackgroundStatus() {
 		return endBackgroundStatus;

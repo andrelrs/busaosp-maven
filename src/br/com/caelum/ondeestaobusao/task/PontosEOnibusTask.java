@@ -8,6 +8,7 @@ import br.com.caelum.ondeestaobusao.activity.R;
 import br.com.caelum.ondeestaobusao.activity.application.BusaoApplication;
 import br.com.caelum.ondeestaobusao.evento.PontosProximosEncontrados;
 import br.com.caelum.ondeestaobusao.model.Coordenada;
+import br.com.caelum.ondeestaobusao.model.Onibus;
 import br.com.caelum.ondeestaobusao.model.Ponto;
 
 import com.google.gson.reflect.TypeToken;
@@ -40,8 +41,17 @@ public class PontosEOnibusTask extends BaseCachedGetJsonAsyncTask<Coordenada, Ar
 	public ArrayList<Ponto> onErrorReturn() {
 		return new ArrayList<Ponto>();
 	}
-	
-	@Override
+
+    @Override
+    protected void gambiarra(ArrayList<Ponto> pontos) {
+        for (Ponto ponto : pontos) {
+            for (Onibus onibus : ponto.getOnibuses()) {
+                onibus.setPonto(ponto);
+            }
+        }
+    }
+
+    @Override
 	protected void onPostExecute(ArrayList<Ponto> result) {
 		if (TaskStatus.OK.equals(getEndBackgroundStatus())) {
 			PontosProximosEncontrados.notifica(application, result);
