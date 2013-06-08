@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BusaoTheme.ProgressBarBackground">
+        <item name="android:background">@color/background_geral</item>
+    </style>
+
+    <style name="BusaoTheme" parent="android:Theme.Holo">
+        <item name="android:actionBarStyle">@style/Widget.BusaoTheme.ActionBar</item>
+    </style>
+
+    <style name="Widget.BusaoTheme.ActionBar" parent="android:Widget.Holo.ActionBar">
+        <item name="android:backgroundSplit">@drawable/ic_bar_background</item>
+    </style>
+
+</resources>

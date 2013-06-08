@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    <View
+        android:id="@+id/map_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
+    <include
+        android:id="@+id/progress_bar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        layout="@layout/progress_bar"
+        android:layout_alignBottom="@+id/map_view"
+        android:layout_alignLeft="@+id/map_view"
+        android:layout_alignRight="@+id/map_view"
+        android:layout_alignTop="@+id/map_view" />
+</RelativeLayout>
