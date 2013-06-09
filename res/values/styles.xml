@@ -6,9 +6,7 @@
         <item name="android:textSize">@dimen/tamanho_letra_do_ponto</item>
     </style>
     
-    <style name="DistanciaOnibusApparence">
-        <item name="android:paddingLeft">6dp</item>
-        <item name="android:textColor">@android:color/background_light</item>
+    <style name="DistanciaOnibusApparence" parent="NomeOnibusApparence">
         <item name="android:textSize">@dimen/tamanho_letra_da_distancia</item>
     </style>
     
@@ -40,7 +38,6 @@
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
         <item name="android:textColor">@color/texto_onibus_expandable_list</item>
-        <item name="android:background">@drawable/item_onibus_select</item>
     </style>
 	
 </resources>
