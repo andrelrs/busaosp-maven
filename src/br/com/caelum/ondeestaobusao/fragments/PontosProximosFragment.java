@@ -101,7 +101,7 @@ public class PontosProximosFragment extends Fragment {
 
             @Override
             public void onDestroyActionMode(ActionMode actionMode) {
-
+                selecionados.clear();
             }
         };
     }

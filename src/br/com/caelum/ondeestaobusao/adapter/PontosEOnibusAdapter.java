@@ -16,7 +16,7 @@ import br.com.caelum.ondeestaobusao.model.Onibus;
 import br.com.caelum.ondeestaobusao.model.Ponto;
 import android.widget.CheckBox;
 
-public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeadersAdapter {
+public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeadersAdapter, View.OnClickListener {
 	private final Activity activity;
 	private final List<Onibus> onibuses;
 
@@ -81,10 +81,20 @@ public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeade
             holder = (OnibusViewHolder) convertView.getTag();
         }
 
+        holder.selecionado.setOnClickListener(this);
         holder.nome.setText(onibus.toString());
         holder.selecionado.setTag(onibus);
+        holder.selecionado.setChecked(onibus.iseFavorito());
 
         return convertView;
+    }
+
+    @Override
+    public void onClick(View view) {
+        CheckBox checkBox = (CheckBox) view;
+        Onibus onibus = (Onibus) view.getTag();
+
+        onibus.seteFavorito(checkBox.isChecked());
     }
 
     class HeaderViewHolder {

@@ -12,6 +12,8 @@ public class Onibus implements Serializable {
 
     private transient Ponto ponto;
 
+    private transient boolean eFavorito = false;
+
 	public Onibus(Long id, String letreiro, int codigoGPS, Operacao operacao, Sentido sentido) {
 		this.id = id;
 		this.letreiro = letreiro;
@@ -53,4 +55,14 @@ public class Onibus implements Serializable {
     public void setPonto(Ponto ponto) {
         this.ponto = ponto;
     }
+
+    public boolean iseFavorito() {
+        return eFavorito;
+    }
+
+    public void seteFavorito(boolean eFavorito) {
+        this.eFavorito = eFavorito;
+    }
+
+
 }
