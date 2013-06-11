@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              style="@style/Expandable_Onibus"
-              android:background="?android:attr/activatedBackgroundIndicator"
-              >
-<TextView
-    android:id="@+id/nome_onibus"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerVertical="true"
-    android:layout_alignParentLeft="true"
-/>
+                style="@style/Expandable_Onibus"
+                android:background="?android:attr/activatedBackgroundIndicator"
+                android:id="@+id/ponto_do_onibus"
+        >
+    <TextView
+            android:id="@+id/nome_onibus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            />
 
     <CheckBox
             android:id="@+id/onibus_selecionado"
@@ -19,8 +20,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:visibility="invisible"
-            />
+            android:button="@drawable/ic_favorito"
+            android:focusable="false"
+            android:padding="10dp"
+    />
 
 </RelativeLayout>

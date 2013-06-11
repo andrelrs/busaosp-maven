@@ -76,14 +76,13 @@ public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeade
             holder = new OnibusViewHolder();
             holder.nome = (TextView) convertView.findViewById(R.id.nome_onibus);
             holder.selecionado = (CheckBox) convertView.findViewById(R.id.onibus_selecionado);
-
             convertView.setTag(holder);
         } else {
             holder = (OnibusViewHolder) convertView.getTag();
         }
 
         holder.nome.setText(onibus.toString());
-        holder.selecionado.setChecked(false);
+        holder.selecionado.setTag(onibus);
 
         return convertView;
     }
