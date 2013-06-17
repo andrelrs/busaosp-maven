@@ -124,38 +124,4 @@ public class PontosEOnibusAdapter extends BaseAdapter implements StickyListHeade
         return onibuses;
     }
 
-    /*	@Override
-	public View getChildView(int groupPosition, int childPosition,
-			boolean isLastChild, View convertView, ViewGroup parent) {
-		
-		Onibus onibus = pontos.get(groupPosition).getOnibuses().get(childPosition);
-		
-		TextView view = (TextView) activity.getLayoutInflater().inflate(R.layout.item_onibus, null);
-		view.setText(onibus.toString());
-		
-		return view;
-	}*/
-
-
-/*	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded,
-			View convertView, ViewGroup parent) {
-		
-		Ponto ponto = pontos.get(groupPosition);
-		
-		View view = activity.getLayoutInflater().inflate(R.layout.item_list_de_pontos, null);
-		
-		TextView nomePonto = (TextView) view.findViewById(R.id.nomePonto);
-		TextView distancia = (TextView) view.findViewById(R.id.distancia);
-		
-		nomePonto.setText(ponto.getDescricao());
-		distancia.setText(ponto.getDistancia());
-		
-		if(isExpanded) {
-			view.setBackgroundResource(R.drawable.fundo_lista_pontos_e_onibuses);
-		}
-		
-		return view;
-	}*/
-
 }
